@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { useSpring, animated } from "@react-spring/web";
 import { useDrag, usePinch } from "react-use-gesture";
 
 function App() {
   const [offset, setOffset] = useState<[number, number]>();
-
   const bindDrag = useDrag((state) => {
     setOffset(state.offset);
   });
@@ -20,6 +20,19 @@ function App() {
       },
     }
   );
+
+  const [flip, setFlip] = useState(false);
+  const springProps = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    reset: true,
+    reverse: flip,
+    delay: 400,
+    config: {
+      tension: 130,
+    },
+    onRest: () => setFlip(!flip),
+  });
 
   return (
     <div className="App">
@@ -45,6 +58,7 @@ function App() {
             offset: {offset[0]}, {offset[1]}
           </div>
         )}
+        <animated.div style={springProps}>I will fade in</animated.div>
       </header>
     </div>
   );
