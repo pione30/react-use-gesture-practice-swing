@@ -38,7 +38,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div {...bindDrag()} className="draggable">
+        <div {...bindDrag()} className="gesturable">
           <img
             src={logo}
             style={{ width: offset[0], height: offset[1] }}
@@ -46,7 +46,7 @@ function App() {
             alt="logo"
           />
         </div>
-        <div {...bindPinch()} className="draggable">
+        <div {...bindPinch()} className="gesturable">
           <img
             src={logo}
             style={{ width: offset[0], height: offset[1] }}

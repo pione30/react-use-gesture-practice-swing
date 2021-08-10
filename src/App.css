@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.draggable {
+.gesturable {
   touch-action: none;
 }
 
