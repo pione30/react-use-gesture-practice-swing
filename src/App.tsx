@@ -2,17 +2,18 @@ import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { useSpring, animated } from "@react-spring/web";
-import { useDrag, usePinch } from "react-use-gesture";
+import { useDrag, usePinch, addV } from "react-use-gesture";
 
 function App() {
-  const [offset, setOffset] = useState<[number, number]>();
+  const initialSize = [557.203, 400];
+  const [offset, setOffset] = useState(initialSize);
   const bindDrag = useDrag((state) => {
-    setOffset(state.offset);
+    setOffset(addV(initialSize, state.offset));
   });
 
   const bindPinch = usePinch(
     (state) => {
-      setOffset(state.offset);
+      setOffset(addV(initialSize, state.offset));
     },
     {
       eventOptions: {
@@ -40,7 +41,7 @@ function App() {
         <div {...bindDrag()} className="draggable">
           <img
             src={logo}
-            style={{ width: offset?.[0], height: offset?.[1] }}
+            style={{ width: offset[0], height: offset[1] }}
             className="App-logo"
             alt="logo"
           />
@@ -48,7 +49,7 @@ function App() {
         <div {...bindPinch()} className="draggable">
           <img
             src={logo}
-            style={{ width: offset?.[0], height: offset?.[1] }}
+            style={{ width: offset[0], height: offset[1] }}
             className="App-logo"
             alt="logo"
           />
